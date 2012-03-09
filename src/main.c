@@ -15,6 +15,65 @@
 
 static GLboolean should_rotate = GL_TRUE;
 
+static float width, height, angle;
+static float cube_color[4];
+static float pos_x, pos_y;
+static float cube_pos_x, cube_pos_y, cube_pos_z;
+GLfloat light_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+GLfloat light_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+GLfloat light_pos[] = { 0.0f, 25.0f, 0.0f, 1.0f };
+GLfloat light_direction[] = { 0.0f, 0.0f, -30.0f, 1.0f };
+
+static float cube_vertices[] = {
+		// FRONT
+		-2.0f, -2.0f, 2.0f, 2.0f, -2.0f, 2.0f, -2.0f,
+		2.0f,
+		2.0f,
+		2.0f,
+		2.0f,
+		2.0f,
+		// BACK
+		-2.0f, -2.0f, -2.0f, -2.0f, 2.0f, -2.0f, 2.0f, -2.0f,
+		-2.0f,
+		2.0f,
+		2.0f,
+		-2.0f,
+		// LEFT
+		-2.0f, -2.0f, 2.0f, -2.0f, 2.0f, 2.0f, -2.0f, -2.0f, -2.0f,
+		-2.0f,
+		2.0f,
+		-2.0f,
+		// RIGHT
+		2.0f, -2.0f, -2.0f, 2.0f, 2.0f, -2.0f, 2.0f, -2.0f, 2.0f, 2.0f,
+		2.0f,
+		2.0f,
+		// TOP
+		-2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, -2.0f, 2.0f, -2.0f, 2.0f, 2.0f,
+		-2.0f,
+		// BOTTOM
+		-2.0f, -2.0f, 2.0f, -2.0f, -2.0f, -2.0f, 2.0f, -2.0f, 2.0f, 2.0f, -2.0f,
+		-2.0f, };
+
+float cube_normals[] = {
+		// FRONT
+		0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f,
+		1.0f,
+		// BACK
+		0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f,
+		0.0f,
+		-1.0f,
+		// LEFT
+		-1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f,
+		0.0f,
+		// RIGHT
+		1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+		// TOP
+		0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+		// BOTTOM
+		0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f,
+		0.0f };
+
 static void quit_tutorial( int code )
 {
     /*
@@ -71,34 +130,85 @@ static void process_events( void )
 
 }
 
+void enable_2d() {
+	glViewport(0, 0, (int) width, (int) height);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	glOrthof(0.0f, width / height, 0.0f, 1.0f, -1.0f, 1.0f);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glScalef(1.0f / height, 1.0f / height, 1.0f);
+}
+
+void enable_3d() {
+	glViewport(0, 0, (int) width, (int) height);
+
+	GLfloat aspect_ratio = width / height;
+
+	GLfloat fovy = 45;
+	GLfloat zNear = 1.0f;
+	GLfloat zFar = 1000.0f;
+
+	GLfloat top = tan(fovy * 0.0087266462599716478846184538424431f) * zNear;
+	GLfloat bottom = -top;
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	glFrustumf(aspect_ratio * bottom, aspect_ratio * top, bottom, top, zNear,
+			zFar);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
+void update() {
+	angle = fmod((angle + 1.0f), 360.0 );
+}
+
 static void draw_screen( void )
 {
-    /* Our angle of rotation. */
-    static float angle = 0.0f;
+	//Typical render pass
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    /* Clear the color and depth buffers. */
-    glClearColor(1.0, 1.0, 0.0, 1.0);
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	//Then render the cube
+	enable_3d();
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_DEPTH_TEST);
 
-    /* We don't want to modify the projection matrix. */
-    glMatrixMode( GL_MODELVIEW );
-    glLoadIdentity( );
+	glTranslatef(cube_pos_x, cube_pos_y, cube_pos_z);
 
-    /* Move down the z-axis. */
-    glTranslatef( 0.0, 0.0, -5.0 );
+	glRotatef(30.0f, 1.0f, 0.0f, 0.0f);
+	glRotatef(15.0f, 0.0f, 0.0f, 1.0f);
+	glRotatef(angle, 0.0f, 1.0f, 0.0f);
 
-    /* Rotate. */
-    glRotatef( angle, 0.0, 1.0, 0.0 );
+	glColor4f(cube_color[0], cube_color[1], cube_color[2], cube_color[3]);
 
-    if( should_rotate ) {
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
 
-        if( ++angle > 360.0f ) {
-            angle = 0.0f;
-        }
+	glVertexPointer(3, GL_FLOAT, 0, cube_vertices);
+	glNormalPointer(GL_FLOAT, 0, cube_normals);
 
-    }
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 4, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 8, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 12, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 16, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 20, 4);
 
-    // Draw something here?
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_COLOR_MATERIAL);
+	glDisable(GL_DEPTH_TEST);
 
     SDL_GL_SwapBuffers( );
 }
@@ -116,30 +226,24 @@ void perspectiveGL( GLfloat fovY, GLfloat aspect, GLfloat zNear, GLfloat zFar )
 
 static void setup_opengl( int width, int height )
 {
-    float ratio = (float) width / (float) height;
+	cube_pos_x = 2.9f;
+	cube_pos_y = 0.3f;
+	cube_pos_z = -20.0f;
 
-    /* Our shading model--Gouraud (smooth). */
-    glShadeModel( GL_SMOOTH );
+	cube_color[0] = 1.0f;
+	cube_color[1] = 0.0f;
+	cube_color[2] = 0.0f;
+	cube_color[3] = 1.0f;
 
-    /* Culling. */
-    glCullFace( GL_BACK );
-    glFrontFace( GL_CCW );
-    glEnable( GL_CULL_FACE );
+	//Common gl setup
+	glShadeModel(GL_SMOOTH);
+	glClearColor(0.775f, 0.775f, 0.775f, 1.0f);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_pos);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
 
-    /* Set the clear color. */
-    glClearColor( 0, 0, 0, 0 );
-
-    /* Setup our viewport. */
-    glViewport( 0, 0, width, height );
-
-    /*
-     * Change to the projection matrix and set
-     * our viewing volume.
-     */
-    glMatrixMode( GL_PROJECTION );
-    glLoadIdentity( );
-
-    perspectiveGL( 60.0, ratio, 1.0, 1024.0 );
+	glEnable(GL_CULL_FACE);
 }
 
 int main( int argc, char* argv[] )
@@ -147,8 +251,6 @@ int main( int argc, char* argv[] )
     /* Information about the current video settings. */
     const SDL_VideoInfo* info = NULL;
     /* Dimensions of our window. */
-    int width = 0;
-    int height = 0;
     /* Color depth in bits of our window. */
     int bpp = 0;
     /* Flags we will pass into SDL_SetVideoMode. */
@@ -181,8 +283,8 @@ int main( int argc, char* argv[] )
      * safe. Under Win32, ChangeDisplaySettings
      * can change the bpp.
      */
-    width = 640;
-    height = 480;
+    width = 1024;
+    height = 600;
     bpp = info->vfmt->BitsPerPixel;
 
     /*
@@ -243,6 +345,7 @@ int main( int argc, char* argv[] )
         process_events( );
         /* Draw the screen. */
         draw_screen( );
+        update();
     }
 
     /* Never reached. */
