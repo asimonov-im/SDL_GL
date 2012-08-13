@@ -35,12 +35,15 @@
     <!-- <copyright></copyright> -->
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
-    <author>Example Inc.</author>
+    <author>Pandas in Motion</author>
+    <authorId>gYAAgM2mCYw-oMB3ErQwGys2iV4</authorId>
     
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
    
     <initialWindow>
+        <aspectRatio>landscape</aspectRatio>
+        <autoOrients>false</autoOrients>
         <systemChrome>none</systemChrome>
         <transparent>false</transparent>
     </initialWindow>

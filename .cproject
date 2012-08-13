@@ -43,6 +43,7 @@
 								<option id="com.qnx.qcc.option.linker.debug.680034084" name="Debug (-g)" superClass="com.qnx.qcc.option.linker.debug" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.923797571" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
+									<listOptionValue builtIn="false" value="freetype"/>
 									<listOptionValue builtIn="false" value="SDL12"/>
 									<listOptionValue builtIn="false" value="bps"/>
 								</option>
@@ -62,7 +63,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="backup_main.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -106,6 +107,7 @@
 							<tool id="com.qnx.qcc.tool.linker.1400004319" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
 								<option id="com.qnx.qcc.option.linker.libraries.1290119501" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
+									<listOptionValue builtIn="false" value="freetype"/>
 									<listOptionValue builtIn="false" value="SDL12"/>
 									<listOptionValue builtIn="false" value="bps"/>
 								</option>
@@ -126,7 +128,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="backup_main.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -174,6 +176,7 @@
 								<option id="com.qnx.qcc.option.linker.profile2.1180395629" name="Build for Profiling (Function Instrumentation) (-lprofiling)" superClass="com.qnx.qcc.option.linker.profile2" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.1296619333" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
+									<listOptionValue builtIn="false" value="freetype"/>
 									<listOptionValue builtIn="false" value="SDL12"/>
 									<listOptionValue builtIn="false" value="bps"/>
 								</option>
@@ -191,7 +194,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="backup_main.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -239,6 +242,7 @@
 								<option id="com.qnx.qcc.option.linker.coverage.2051752913" name="Build for Code Coverage (-ftest-coverage -fprofile-arcs -p)" superClass="com.qnx.qcc.option.linker.coverage" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.466328723" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
+									<listOptionValue builtIn="false" value="freetype"/>
 									<listOptionValue builtIn="false" value="SDL12"/>
 									<listOptionValue builtIn="false" value="bps"/>
 								</option>
@@ -256,7 +260,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="backup_main.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -301,6 +305,7 @@
 								<option id="com.qnx.qcc.option.linker.debug.779475878" name="Debug (-g)" superClass="com.qnx.qcc.option.linker.debug" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.455576380" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
+									<listOptionValue builtIn="false" value="freetype"/>
 									<listOptionValue builtIn="false" value="SDL12"/>
 									<listOptionValue builtIn="false" value="bps"/>
 								</option>
@@ -318,7 +323,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="backup_main.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -365,6 +370,7 @@
 								<option id="com.qnx.qcc.option.linker.profile2.1641134773" name="Build for Profiling (Function Instrumentation) (-lprofiling)" superClass="com.qnx.qcc.option.linker.profile2" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.545300359" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
+									<listOptionValue builtIn="false" value="freetype"/>
 									<listOptionValue builtIn="false" value="SDL12"/>
 									<listOptionValue builtIn="false" value="bps"/>
 								</option>
@@ -382,7 +388,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="backup_main.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -429,6 +435,7 @@
 								<option id="com.qnx.qcc.option.linker.coverage.1363580152" name="Build for Code Coverage (-ftest-coverage -fprofile-arcs -p)" superClass="com.qnx.qcc.option.linker.coverage" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.150804782" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
 									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
+									<listOptionValue builtIn="false" value="freetype"/>
 									<listOptionValue builtIn="false" value="SDL12"/>
 									<listOptionValue builtIn="false" value="bps"/>
 								</option>
@@ -446,7 +453,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="backup_main.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
